@@ -1793,6 +1793,14 @@ fu! ctrlp#setdir(path, ...)
 	sil! exe cmd s:fnesc(a:path, 'c')
 	let [s:crfilerel, s:dyncwd] = [fnamemodify(s:crfile, ':.'), getcwd()]
 endf
+
+fu! ctrlp#getsearchdir(pmode, ...)
+	let args = a:0 ? a:1 : {}
+	call s:SetWD(args)
+	call ctrlp#setpathmode(a:pmode)
+	return s:dyncwd
+endf
+
 " Fallbacks {{{3
 fu! s:glbpath(...)
 	retu call('ctrlp#utils#globpath', a:000)
@@ -2686,4 +2694,4 @@ fu! s:autocmds()
 endf
 "}}}
 
-" vim:fen:fdm=marker:fmr={{{,}}}:fdl=0:fdc=1:ts=2:sw=2:sts=2
+" vim:nofen:fdm=marker:fmr={{{,}}}:fdl=0:fdc=1:ts=2:sw=2:sts=2
